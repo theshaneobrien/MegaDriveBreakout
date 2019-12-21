@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "genesis.h": "c",
+        "string.h": "c"
+    }
+}
