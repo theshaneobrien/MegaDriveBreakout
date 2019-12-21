@@ -83,6 +83,7 @@ void checkBallBrickCollision();
 void ballCollisionAction(int brickIndex);
 void flashBall();
 void makeBrickField();
+void moveBrickField();
 
 //UI
 void showLogo();
@@ -104,13 +105,27 @@ int main()
 	showLogo();
 
 	//Update + waitVsync = do stuff per frame
+	int counter = 0;
 	while (1)
 	{
 		if(gameOn)
 		{
+			counter++;
 			moveBall();
 			positionPlayer();
 			flashBall();
+
+			// Every 30 frames move the brick field Space Invaders Style
+			if(counter % 30 == 0)
+			{
+				moveBrickField();
+			}
+
+			//Increase our frame counter
+			if(counter % 60 == 0)
+			{
+				counter = 0;
+			}
 		}
 		//Update the Sprite drawing
 		SPR_update();
@@ -437,13 +452,44 @@ void makeBrickField()
 		bricksArray[i].brickSprite = SPR_addSprite(&bricks, x * 32, y * 16, TILE_ATTR(PAL1, 0, FALSE, FALSE));
 		bricksArray[i].brickPosX = x * 32;
 		bricksArray[i].brickPosY = y * 16;
-		bricksArray[i].destroyed = FALSE;
+
 		x++;
 
 		if (x > 8)
 		{
 			y++;
 			x = 1;
+		}
+	}
+}
+
+//Space Invaders style movement
+void moveBrickField()
+{
+	moves++;
+	if (moves <= 6)
+	{
+		for (int i = 0; i < maxBricks; i++)
+		{
+			bricksArray[i].brickPosX += 3 * direction;
+			SPR_setPosition(bricksArray[i].brickSprite, bricksArray[i].brickPosX, bricksArray[i].brickPosY);
+		}
+	}
+	if (moves > 6)
+	{
+		moves = 0;
+		if (direction > 0)
+		{
+			direction = -1;
+		}
+		else
+		{
+			direction = 1;
+		}
+		for (int i = 0; i < maxBricks; i++)
+		{
+			bricksArray[i].brickPosY += 3;
+			SPR_setPosition(bricksArray[i].brickSprite, bricksArray[i].brickPosX, bricksArray[i].brickPosY);
 		}
 	}
 }
