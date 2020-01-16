@@ -9,4 +9,4 @@ WAV gameOver "sounds/gameOver.wav" 5
 WAV start "sounds/start.wav" 5
 WAV wall "sounds/wall.wav" 5
 WAV win "sounds/win.wav" 5
-XGM music "music/music.vgm"
+XGM music "music/bigbreak.vgm"

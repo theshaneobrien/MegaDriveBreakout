@@ -7,7 +7,7 @@ extern const u8 gameOver[17408];
 extern const u8 start[17664];
 extern const u8 wall[6400];
 extern const u8 win[36352];
-extern const u8 music[32000];
+extern const u8 music[70400];
 extern const SpriteDefinition imgball;
 extern const SpriteDefinition paddle;
 extern const SpriteDefinition bricks;

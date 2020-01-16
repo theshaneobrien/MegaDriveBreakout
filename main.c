@@ -125,10 +125,13 @@ void initGame()
 	//init game
 	resetGame();
 
-	//Play a sound effect and some chill beats
+	//How many times to loop the music
 	XGM_setLoopNumber(10);
+	//Load PCM 65 with the start sound effect, how long it is
 	XGM_setPCM(65, &start, 17664);
+	//Play PCM 65, Priority 1 signal from starflet, sound channel 2
 	XGM_startPlayPCM(65, 1, SOUND_PCM_CH2);
+	//Play our Music
 	XGM_startPlay(&music);
 
 	//Init the Joypad
@@ -384,7 +387,9 @@ void checkBallBrickCollision()
 
 void ballCollisionAction(int brickIndex)
 {
+	//We have to fill the PCM buffer with the sound effect before playing it
 	XGM_setPCM(66, &hitBrick, 4608);
+	//Play what's stored in PCM 66, Priority 1 Signal from Starfleet, Sound Channel 2
 	XGM_startPlayPCM(66, 1, SOUND_PCM_CH2);
 	
 	//Destroy Brick
